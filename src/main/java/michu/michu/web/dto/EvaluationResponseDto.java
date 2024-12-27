@@ -22,6 +22,5 @@ public class EvaluationResponseDto {
     public static class QuestionResponse {
         private String question; // 질문 텍스트
         private int score;       // 선택한 점수 (1~5)
-        private String comment;  // 선택에 대한 추가 의견
     }
 }

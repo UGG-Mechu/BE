@@ -36,7 +36,6 @@ public class EvaluationService {
                                 .map(question -> EvaluationResponseDto.QuestionResponse.builder()
                                         .question(question)
                                         .score(0) // 초기값 0
-                                        .comment("") // 초기값 빈 문자열
                                         .build())
                                 .collect(Collectors.toList())
                 )
@@ -54,7 +53,6 @@ public class EvaluationService {
                                 .map(response -> Evaluation.QuestionAnswer.builder()
                                         .question(response.getQuestion())
                                         .score(response.getScore())
-                                        .comment(response.getComment())
                                         .build())
                                 .collect(Collectors.toList())
                 )
