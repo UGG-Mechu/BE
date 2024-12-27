@@ -29,7 +29,7 @@ public class SwaggerConfig {
                         .bearerFormat("JWT"));
 
         return new OpenAPI()
-                .addServersItem(new Server().url("/"))
+                .addServersItem(new Server().url("http://43.201.66.24:8080")) // 실제 서버 URL
                 .info(info)
                 .addSecurityItem(securityRequirement)
                 .components(components);
