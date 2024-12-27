@@ -15,11 +15,12 @@ import java.util.List;
 public class StepQuestion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // 질문 ID
 
-    private int step; // 단계 번호 (1~5)
-    private String question; // 단계별 질문
+    private int step; // 질문 문항 (1~5)
+
+    private String question; // 질문 내용
 
     @ElementCollection
-    private List<String> options; // 선택지
+    private List<String> options; // 질문에 대한 선택지 (5개?)
 }

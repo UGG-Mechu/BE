@@ -10,16 +10,16 @@ import org.hibernate.annotations.ColumnDefault;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class DailyScore {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // 사용자 ID
+    private Long id; // 데일리 스코어 ID
 
-    @Column(nullable = false, length = 20)
-    private String name; // 사용자 이름
+    @ManyToOne
+    private User user;
 
     @ColumnDefault("0")
-    private int money; // 목표 금액
+    private int dailyScore; // 일일 점수
 
 }

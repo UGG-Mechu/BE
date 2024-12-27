@@ -15,13 +15,13 @@ public class StepAnswer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // 답변 아이디
 
     @ManyToOne
-    private Item item;
+    private Item item; // 답변의 대상인 물건
 
-    private int step; // 단계 번호
-    private String selectedOption; // 선택된 선택지
-    private String additionalInput; // 추가 입력값
+    private int step; // 질문 문항번호
+
+    private String selectedOption; // 질문에서 선택된 선택지
 
 }

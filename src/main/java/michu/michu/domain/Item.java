@@ -17,20 +17,20 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // 상품 ID
 
     @ManyToOne
-    private User user;
+    private User user; // 상품 소유하고 있는 User
 
     @Column(nullable = false, length = 20)
-    private String name;
+    private String name; // 상품 이름
 
-    private Date date; // 구매 날짜
+    private Date date; // 상품 구매 날짜
 
     @ColumnDefault("0")
-    private int price;
+    private int price; // 상품 가격
 
     @Column(length = 1000)
-    private String description; // 물건 설명
+    private String description; // 상품에 대한 설명
 
 }
