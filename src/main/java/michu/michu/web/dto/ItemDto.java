@@ -13,4 +13,6 @@ public class ItemDto {
     private Integer price;
 
     private String itemDetail;
+
+    private String reviews;
 }
