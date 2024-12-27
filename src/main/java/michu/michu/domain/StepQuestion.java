@@ -22,4 +22,5 @@ public class StepQuestion {
     private String question; // 단계별 질문
     @ElementCollection
     private List<String> options; // 선택지
+    private int score;
 }
