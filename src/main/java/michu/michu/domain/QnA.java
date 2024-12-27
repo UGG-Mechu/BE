@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Data
@@ -17,7 +16,6 @@ public class QnA { //StepQuestion 대체
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int step; // 문항 번호 (1~5)
 
     private String question; // 단계별 질문

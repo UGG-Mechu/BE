@@ -3,6 +3,7 @@ package michu.michu.service;
 import michu.michu.domain.QnA;
 import michu.michu.repository.QnARepository;
 import michu.michu.web.dto.QnADto;
+import michu.michu.web.dto.QuestionsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +51,7 @@ public class QnAService {
         return QnA.builder()
                 .question(dto.getQuestion())
                 .answers(changeTypeAnswer(dto.getAnswers()))
+                .step(1)
                 .build();
     }
 
