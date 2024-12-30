@@ -26,7 +26,6 @@ public class StepQuestionService {
                 .step(dto.getStep())
                 .question(dto.getQuestion())
                 .options(dto.getOptions())
-                .score(dto.getScore())
                 .build();
     }
 
@@ -41,22 +40,10 @@ public class StepQuestionService {
                 .step(question.getStep())
                 .question(question.getQuestion())
                 .options(question.getOptions())
-                .score(question.getScore())
                 .build();
     }
 
 
-    /**
-     * 모든 질문 단계 조회
-     *
-     * @return List<StepQuestionDTO>
-     */
-    public List<StepQuestionDto> getAllQuestions() {
-        List<StepQuestion> questions = stepQuestionRepository.findAll();
-        return questions.stream()
-                .map(this::convertToDto) // convertToDto 메서드 사용
-                .collect(Collectors.toList());
-    }
 
     /**
      * 질문 등록

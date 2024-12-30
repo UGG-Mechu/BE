@@ -32,6 +32,7 @@ public class StepAnswerService {
                 .step(dto.getStep())
                 .selectedOption(dto.getSelectedOption())
                 .evaluation(evaluation)
+                .score(dto.getScore())
                 .build();
     }
 
@@ -59,5 +60,15 @@ public class StepAnswerService {
                         .evaluationId(answer.getEvaluation().getId())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * 총 점수 계산
+     */
+    public int calculateTotalScore(Long evaluationId) {
+        List<StepAnswer> answers = stepAnswerRepository.findByEvaluationId(evaluationId);
+        return answers.stream()
+                .mapToInt(StepAnswer::getScore)
+                .sum();
     }
 }

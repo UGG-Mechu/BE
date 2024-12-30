@@ -21,7 +21,8 @@ public class PurchaseEvaluation {
 
     private String itemName; // 구매하려는 물건의 이름
     private String evaluationResult; // 평가 결과
-    private int score; // 총점
+
+    private int totalScore; //총 점수
 
     @OneToMany(mappedBy = "evaluation", cascade = CascadeType.ALL)
     private List<StepAnswer> stepAnswers; // 연계된 질문 답변들

@@ -9,13 +9,9 @@ public class StepAnswerConverter {
         return StepAnswerDto.builder()
                 .step(stepAnswer.getStep())
                 .selectedOption(stepAnswer.getSelectedOption())
+                .evaluationId(stepAnswer.getEvaluation().getId())
+                .score(stepAnswer.getScore())
                 .build();
     }
 
-    public static StepAnswer toEntity(StepAnswerDto stepAnswerDTO) {
-        return StepAnswer.builder()
-                .step(stepAnswerDTO.getStep())
-                .selectedOption(stepAnswerDTO.getSelectedOption())
-                .build();
-    }
 }
