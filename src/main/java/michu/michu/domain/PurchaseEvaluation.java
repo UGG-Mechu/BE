@@ -27,6 +27,6 @@ public class PurchaseEvaluation {
     @OneToMany(mappedBy = "evaluation", cascade = CascadeType.ALL)
     private List<StepAnswer> stepAnswers; // 연계된 질문 답변들
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user; // 해당 구매 평가와 연계된 사용자
 }
