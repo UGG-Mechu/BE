@@ -12,6 +12,7 @@ import michu.michu.repository.UserRepository;
 import michu.michu.web.dto.Details.EvaluationDetailsDto;
 import michu.michu.web.dto.Details.QuestionDetailsDto;
 import michu.michu.web.dto.PurchaseEvaluationDto;
+import michu.michu.web.dto.PurchaseEvaluationItemDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +32,7 @@ public class PurchaseEvaluationService {
     private final StepAnswerRepository stepAnswerRepository;
     private final UserRepository userRepository;
 
-    public Long createEvaluationItem(String itemName, Long userId) {
+    public PurchaseEvaluationItemDto createEvaluationItem(String itemName, Long userId) {
         //사용자 조회
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("사용자 조회 안됌"));
@@ -42,39 +43,12 @@ public class PurchaseEvaluationService {
                 .totalScore(0) // 초기 점수는 0
                 .user(user)
                 .build();
-
-        return purchaseEvaluationRepository.save(evaluation).getId();
-    }
-
-    public Long createEvaluation(PurchaseEvaluationDto dto) {
-        //사용자 조회
-        User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("사용자 조회 안됌"));
-
-        // PurchaseEvaluation 생성
-        PurchaseEvaluation evaluation = PurchaseEvaluation.builder()
-                .itemName(dto.getItemName())
-                .evaluationResult(dto.getEvaluationResult())
-                .user(user)
-                .build();
-
-        // StepAnswer 생성 및 연계
-        List<StepAnswer> stepAnswers = dto.getStepAnswers().stream()
-                .map(stepDto -> StepAnswer.builder()
-                        .step(stepDto.getStep())
-                        .selectedOption(stepDto.getSelectedOption())
-                        .evaluation(evaluation)
-                        .build())
-                .collect(Collectors.toList());
-
-        evaluation.setStepAnswers(stepAnswers);
-
-        // 데이터 저장
         purchaseEvaluationRepository.save(evaluation);
-        stepAnswerRepository.saveAll(stepAnswers);
 
-        return evaluation.getId();
-
+        return PurchaseEvaluationItemDto.builder()
+                .purchaseId(evaluation.getId())
+                .itemName(itemName)
+                .build();
     }
 
     public void generateEvaluationResult(Long evaluationId) {

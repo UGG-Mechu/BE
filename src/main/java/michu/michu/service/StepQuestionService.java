@@ -1,8 +1,10 @@
 package michu.michu.service;
 
 import michu.michu.domain.StepQuestion;
+import michu.michu.repository.PurchaseEvaluationRepository;
 import michu.michu.repository.StepQuestionRepository;
 import michu.michu.web.dto.StepQuestionDto;
+import michu.michu.web.dto.StepQuestionResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,9 +53,16 @@ public class StepQuestionService {
      * @param dto StepQuestionDto
      * @return 등록된 질문의 ID
      */
-    public Long createQuestion(StepQuestionDto dto) {
+    public StepQuestionResponseDto createQuestion(StepQuestionDto dto,Long evaluationId) {
         StepQuestion question = convertToEntity(dto);
         StepQuestion savedQuestion = stepQuestionRepository.save(question);
-        return savedQuestion.getId();
+
+        return StepQuestionResponseDto.builder()
+                .step(savedQuestion.getStep())
+                .evaluationId(evaluationId)
+                .selectedOption(null) //처음 질문 만들땐 null
+                .options(savedQuestion.getOptions())
+                .question(savedQuestion.getQuestion())
+                .build();
     }
 }

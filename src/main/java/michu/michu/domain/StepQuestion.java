@@ -22,5 +22,10 @@ public class StepQuestion {
     private String question; // 단계별 질문
     @ElementCollection
     private List<String> options; // 선택지
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "evaluation_id")
+    private PurchaseEvaluation purchaseEvaluation;
+
     private int score;
 }

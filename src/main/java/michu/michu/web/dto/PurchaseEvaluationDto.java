@@ -14,7 +14,7 @@ import java.util.List;
 public class PurchaseEvaluationDto {
     private String itemName;
     private String evaluationResult;
-    private List<StepAnswerDto> stepAnswers;
+    private List<StepAnswerDto> stepAnswers; //질문답변들
     private int totalScore; //총 점수
     private Long userId; // 연계된 사용자 ID
 }

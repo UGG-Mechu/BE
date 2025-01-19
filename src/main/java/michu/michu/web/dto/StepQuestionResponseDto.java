@@ -1,17 +1,16 @@
 package michu.michu.web.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 @Builder
-public class StepQuestionDto {
+@AllArgsConstructor
+@NoArgsConstructor
+public class StepQuestionResponseDto {
     private int step; // 단계 번호
     private String question; // 단계별 질문
     private List<String> options; // 선택지

@@ -8,8 +8,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import michu.michu.service.PurchaseEvaluationService;
 import michu.michu.service.StepAnswerService;
 import michu.michu.service.StepQuestionService;
+import michu.michu.web.dto.PurchaseEvaluationItemDto;
 import michu.michu.web.dto.StepAnswerDto;
 import michu.michu.web.dto.StepQuestionDto;
+import michu.michu.web.dto.StepQuestionResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,12 +35,12 @@ public class StepController {
 
     @PostMapping
     @Operation(summary = "평가 항목 등록", description = "평가 항목(PurchaseEvaluation)을 등록합니다.")
-    public ResponseEntity<Long> createEvaluation(
+    public PurchaseEvaluationItemDto createEvaluation(
             @RequestParam("itemName") String itemName,
             @RequestParam("userId") Long userId
     ) {
-        Long evaluationId = purchaseEvaluationService.createEvaluationItem(itemName, userId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(evaluationId);
+        PurchaseEvaluationItemDto evaluationItem = purchaseEvaluationService.createEvaluationItem(itemName, userId);
+        return evaluationItem;
     }
 
 
@@ -83,13 +85,13 @@ public class StepController {
     @Parameters({
             @Parameter(name = "step", description = "질문 단계 번호입니다."),
             @Parameter(name = "question", description = "구체적인 질문 내용입니다."),
-            @Parameter(name = "options", description = "선택지입니다. 기본은 총 5개의 선택지이며 구분은 ,(쉼표)로 합니다"),
+            @Parameter(name = "options", description = "선택지입니다. 기본은 총 5개의 선택지이며 구분은 ,(쉼표)로 합니다. 점수(1~5점 중 하나)랑 설명을 함께 적어주세요"),
             @Parameter(name = "evaluationId", description = "평가 항목 아이디 입니다."),
     })
 
 
     @PostMapping("/questions")
-    public ResponseEntity<Long> createQuestion(
+    public StepQuestionResponseDto createQuestion(
             @RequestParam("step") int step,
             @RequestParam("question") String question,
             @RequestParam("options") List<String> options,
@@ -99,11 +101,9 @@ public class StepController {
                 .step(step)
                 .question(question)
                 .options(options)
-                .evaluationId(evaluationId)
                 .build();
 
-        Long questionId = stepQuestionService.createQuestion(dto);
-        return ResponseEntity.status(201).body(questionId);
+        return stepQuestionService.createQuestion(dto, evaluationId);
     }
 
     @PostMapping("/evaluate")

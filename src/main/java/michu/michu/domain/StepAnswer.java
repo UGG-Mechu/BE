@@ -22,7 +22,7 @@ public class StepAnswer {
     private int score; //점수
 
     @ManyToOne(fetch = FetchType.LAZY) // 다대일 관계 설정
-    @JoinColumn(name = "evaluation_id", nullable = false) // 외래 키 설정
+    @JoinColumn(name = "evaluation_id") // 외래 키 설정
     private PurchaseEvaluation evaluation; // 연관된 PurchaseEvaluation 객체
 
 }
